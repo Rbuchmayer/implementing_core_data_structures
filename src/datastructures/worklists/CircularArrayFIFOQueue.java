@@ -1,5 +1,7 @@
 package datastructures.worklists;
 
+import java.util.NoSuchElementException;
+
 import cse332.exceptions.NotYetImplementedException;
 import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
 
@@ -8,44 +10,83 @@ import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
  * for method specifications.
  */
 public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
+    
+    private E[] arr;
+    private int back;
+    private int front;
+    private int sizeREMOVE;
+
+    
     public CircularArrayFIFOQueue(int capacity) {
         super(capacity);
-        throw new NotYetImplementedException();
+        arr = (E[]) new Object[capacity];
+        front =  -1;
+        back = -1;
+        sizeREMOVE = 0;
     }
 
     @Override
     public void add(E work) {
-        throw new NotYetImplementedException();
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
+        if (back == arr.length - 1) {
+            back = 0;
+        } else {
+            back++;
+        }
+        arr[back] = work;
+        sizeREMOVE++;
     }
 
     @Override
     public E peek() {
-        throw new NotYetImplementedException();
+        if (!hasWork()) {
+            throw new NoSuchElementException();
+        }
+        return arr[front];
     }
     
     @Override
     public E peek(int i) {
-        throw new NotYetImplementedException();
+        if (!hasWork()) {
+            throw new NoSuchElementException();
+        } else if (i >= size() || i < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        return arr[(front + i) % arr.length];
     }
     
     @Override
     public E next() {
-        throw new NotYetImplementedException();
+        if (!hasWork()) {
+            throw new NoSuchElementException();
+        }
+        E data= peek();
+        front = front++ % arr.length;
+        sizeREMOVE--;
     }
     
     @Override
     public void update(int i, E value) {
-        throw new NotYetImplementedException();
+        if (i >= size() || i < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        arr[(front + i) % arr.length] = value;
     }
     
     @Override
     public int size() {
-        throw new NotYetImplementedException();
+        return size();
     }
     
     @Override
     public void clear() {
-        throw new NotYetImplementedException();
+        arr = (E[]) new Object[super.capacity()];
+        front =  -1;
+        back = -1;
+        sizeREMOVE = 0;
+        // TODO change this
     }
 
     @Override
