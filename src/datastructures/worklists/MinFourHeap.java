@@ -10,19 +10,35 @@ import cse332.exceptions.NotYetImplementedException;
 public class MinFourHeap<E extends Comparable<E>> extends PriorityWorkList<E> {
     /* Do not change the name of this field; the tests rely on it to work correctly. */
     private E[] data;
+    private int size;
     
     public MinFourHeap() {
-        throw new NotYetImplementedException();
+        data = (E[]) new Object[1000]; // TODO CHANGE SIZE
+        size = 0;
     }
 
     @Override
     public boolean hasWork() {
-        throw new NotYetImplementedException();
+        return size > 0;
     }
 
     @Override
     public void add(E work) {
-        throw new NotYetImplementedException();
+        data[size] = work;
+        percUp(size);
+        size++;            
+    }
+    
+    public void percUp(int i) {
+        if (i > 0) {
+            int parent = (i - 1) / 4;
+            if (data[i].compareTo(data[parent]) > 0) {
+                E temp = data[i];
+                data[i] = data[parent];
+                data[parent] = data[i];
+                percUp(parent);
+            }
+        }
     }
 
     @Override
