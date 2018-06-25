@@ -20,8 +20,8 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
     public CircularArrayFIFOQueue(int capacity) {
         super(capacity);
         arr = (E[]) new Object[capacity];
-        front =  -1;
-        back = -1;
+        front = 0;
+        back = 0;
         sizeREMOVE = 0;
     }
 
@@ -54,7 +54,7 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
         } else if (i >= size() || i < 0) {
             throw new IndexOutOfBoundsException();
         }
-        return arr[(front + i) % arr.length];
+        return arr[(front + i) % (arr.length - 1)];
     }
     
     @Override
@@ -62,9 +62,10 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
         if (!hasWork()) {
             throw new NoSuchElementException();
         }
-        E data= peek();
+        E data = peek();
         front = front++ % arr.length;
         sizeREMOVE--;
+        return data;
     }
     
     @Override
@@ -77,7 +78,7 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
     
     @Override
     public int size() {
-        return size();
+        return sizeREMOVE;
     }
     
     @Override
