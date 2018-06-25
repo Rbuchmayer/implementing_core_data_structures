@@ -69,5 +69,6 @@ public class ListFIFOQueue<E> extends FIFOWorkList<E> {
 	public void clear() {
 		front = null;
 		back = null;
+		size = 0;
 	}
 }
