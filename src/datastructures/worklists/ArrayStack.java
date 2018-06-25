@@ -9,7 +9,7 @@ import cse332.interfaces.worklists.LIFOWorkList;
  * See cse332/interfaces/worklists/LIFOWorkList.java for method specifications.
  */
 public class ArrayStack<E> extends LIFOWorkList<E> {
-
+	//
 	private E[] arr;
 	private int back;
 	private int size;
@@ -28,10 +28,10 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 			arr[back] = work;
 			size++;
 		} catch (IndexOutOfBoundsException resize) {
-			
+
 			@SuppressWarnings("unchecked")
-			E[] resized = (E[]) new Object[arr.length * 2]; 
-			for(int i = 0; i < arr.length; i++) {
+			E[] resized = (E[]) new Object[arr.length * 2];
+			for (int i = 0; i < arr.length; i++) {
 				resized[i] = arr[i];
 			}
 			arr = resized;
@@ -44,7 +44,7 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 
 	@Override
 	public E peek() {
-		if(size <= 0) {
+		if (size <= 0) {
 			throw new NoSuchElementException();
 		}
 		E data = arr[back];
@@ -53,7 +53,7 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 
 	@Override
 	public E next() {
-		if(size <= 0) {
+		if (size <= 0) {
 			throw new NoSuchElementException();
 		}
 		E data = arr[back];

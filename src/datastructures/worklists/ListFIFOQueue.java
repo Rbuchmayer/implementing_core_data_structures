@@ -8,7 +8,7 @@ import cse332.interfaces.worklists.FIFOWorkList;
  * See cse332/interfaces/worklists/FIFOWorkList.java for method specifications.
  */
 public class ListFIFOQueue<E> extends FIFOWorkList<E> {
-
+	//
 	@SuppressWarnings("hiding")
 	private class Node<E> {
 		private E data;
