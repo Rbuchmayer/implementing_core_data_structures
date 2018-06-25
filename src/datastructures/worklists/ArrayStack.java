@@ -12,39 +12,29 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 	//
 	private E[] arr;
 	private int back;
-	private int size;
-
+	
 	@SuppressWarnings("unchecked")
 	public ArrayStack() {
 		arr = (E[]) new Object[10];
 		back = -1;
-		size = 0;
 	}
 
 	@Override
 	public void add(E work) {
-		try {
-			back++;
-			arr[back] = work;
-			size++;
-		} catch (IndexOutOfBoundsException resize) {
-
-			@SuppressWarnings("unchecked")
-			E[] resized = (E[]) new Object[arr.length * 2];
+		if (back == arr.length - 1) {
+		    E[] resized = (E[]) new Object[arr.length * 2];
 			for (int i = 0; i < arr.length; i++) {
 				resized[i] = arr[i];
 			}
 			arr = resized;
-			back++;
-			size++;
-			arr[back] = work;
 		}
-
+        back++;
+        arr[back] = work;
 	}
 
 	@Override
 	public E peek() {
-		if (size <= 0) {
+		if (back + 1 <= 0) {
 			throw new NoSuchElementException();
 		}
 		E data = arr[back];
@@ -55,13 +45,12 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 	public E next() {
 	    E dataRet = peek();
 		back--;
-		size--;
 		return dataRet;
 	}
 
 	@Override
 	public int size() {
-		return size;
+		return back + 1;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,6 +58,5 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 	public void clear() {
 		arr = (E[]) new Object[10];
 		back = -1;
-		size = 0;
 	}
 }
