@@ -12,17 +12,15 @@ import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
 public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
     
     private E[] arr;
-    private int back;
     private int front;
-    private int sizeREMOVE;
+    private int size;
 
     
     public CircularArrayFIFOQueue(int capacity) {
         super(capacity);
         arr = (E[]) new Object[capacity];
         front = 0;
-        back = 0;
-        sizeREMOVE = 0;
+        size = 0;
     }
 
     @Override
@@ -30,13 +28,8 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
         if (isFull()) {
             throw new IllegalStateException();
         }
-        if (back == arr.length - 1) {
-            back = 0;
-        } else {
-            back++;
-        }
-        arr[back] = work;
-        sizeREMOVE++;
+        arr[(front + size) % arr.length] = work;
+        size++;
     }
 
     @Override
@@ -63,8 +56,8 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
             throw new NoSuchElementException();
         }
         E data = peek();
-        front = front++ % arr.length;
-        sizeREMOVE--;
+        front = (front + 1) % arr.length;
+        size--;
         return data;
     }
     
@@ -78,16 +71,14 @@ public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
     
     @Override
     public int size() {
-        return sizeREMOVE;
+        return size;
     }
     
     @Override
     public void clear() {
         arr = (E[]) new Object[super.capacity()];
-        front =  -1;
-        back = -1;
-        sizeREMOVE = 0;
-        // TODO change this
+        front = 0;
+        size = 0;
     }
 
     @Override
