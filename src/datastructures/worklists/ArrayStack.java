@@ -1,4 +1,4 @@
-package datastructures.worklists;
+    package datastructures.worklists;
 
 import java.util.NoSuchElementException;
 
@@ -53,13 +53,10 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 
 	@Override
 	public E next() {
-		if (size <= 0) {
-			throw new NoSuchElementException();
-		}
-		E data = arr[back];
+	    E dataRet = peek();
 		back--;
 		size--;
-		return data;
+		return dataRet;
 	}
 
 	@Override
@@ -71,7 +68,7 @@ public class ArrayStack<E> extends LIFOWorkList<E> {
 	@Override
 	public void clear() {
 		arr = (E[]) new Object[10];
-		back = 0;
+		back = -1;
 		size = 0;
 	}
 }

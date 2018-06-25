@@ -17,14 +17,17 @@ public class ListFIFOQueue<E> extends FIFOWorkList<E> {
 
 	private Node<E> front;
 	private Node<E> back;
+	private int size;
 
 	public ListFIFOQueue() {
 		front = null;
-		back = front;
+		back = null;
+		size = 0;
 	}
 
 	@Override
 	public void add(E work) {
+	    size++;
 		Node<E> n = new Node<E>();
 		n.data = work;
 		n.next = null;
@@ -48,31 +51,23 @@ public class ListFIFOQueue<E> extends FIFOWorkList<E> {
 
 	@Override
 	public E next() {
-		if(front == null) {
-			throw new NoSuchElementException();
-		}
-		E next = front.data;
+	    E nextRet = peek();
 		front = front.next;
 		if(front == null) {
 			back = null;
 		}
-		return next;
+		size--;
+		return nextRet;
 	}
 
 	@Override
 	public int size() {
-		Node<E> current = front;
-		int size = 0;
-		while (current != null) {
-			current = current.next;
-			size++;
-		}
 		return size;
 	}
 
 	@Override
 	public void clear() {
 		front = null;
-		back = front;
+		back = null;
 	}
 }
