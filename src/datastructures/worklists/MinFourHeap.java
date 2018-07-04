@@ -1,63 +1,111 @@
 package datastructures.worklists;
 
 import cse332.interfaces.worklists.PriorityWorkList;
+
+import java.util.NoSuchElementException;
+
 import cse332.exceptions.NotYetImplementedException;
 
 /**
- * See cse332/interfaces/worklists/PriorityWorkList.java
- * for method specifications.
+ * See cse332/interfaces/worklists/PriorityWorkList.java for method
+ * specifications.
  */
 public class MinFourHeap<E extends Comparable<E>> extends PriorityWorkList<E> {
-    /* Do not change the name of this field; the tests rely on it to work correctly. */
-    private E[] data;
-    private int size;
-    
-    public MinFourHeap() {
-        data = (E[]) new Object[1000]; // TODO CHANGE SIZE
-        size = 0;
-    }
 
-    @Override
-    public boolean hasWork() {
-        return size > 0;
-    }
+	/*
+	 * Do not change the name of this field; the tests rely on it to work correctly.
+	 */
+	private E[] data;
+	private int back;
 
-    @Override
-    public void add(E work) {
-        data[size] = work;
-        percUp(size);
-        size++;            
-    }
-    
-    public void percUp(int i) {
-        if (i > 0) {
-            int parent = (i - 1) / 4;
-            if (data[i].compareTo(data[parent]) > 0) {
-                E temp = data[i];
-                data[i] = data[parent];
-                data[parent] = data[i];
-                percUp(parent);
-            }
-        }
-    }
+	public MinFourHeap() {
+		data = (E[]) new Comparable[10];
+		back = -1;
+	}
 
-    @Override
-    public E peek() {
-        throw new NotYetImplementedException();
-    }
+	@Override
+	public boolean hasWork() {
+		return size() > 0;
+	}
 
-    @Override
-    public E next() {
-        throw new NotYetImplementedException();
-    }
+	@Override
+	public void add(E work) {
+		if (!hasWork()) {
+			back++;
+			data[back] = work;
+		} else {
+			if (back == data.length - 1) {
+				E[] resized = (E[]) new Comparable[data.length * 2];
+				for (int i = 0; i < data.length; i++) {
+					resized[i] = data[i];
+				}
+				data = resized;
+			}
 
-    @Override
-    public int size() {
-        throw new NotYetImplementedException();
-    }
+			back++;
+			data[back] = work;
 
-    @Override
-    public void clear() {
-        throw new NotYetImplementedException();
-    }
+			int current = back;
+			while (data[(int) Math.floor((current - 1) / 4)].compareTo(work) > 0) {
+				E temp = data[current];
+				data[current] = data[(int) Math.floor((current - 1) / 4)];
+				data[(int) Math.floor((current - 1) / 4)] = temp;
+				current = (int) Math.floor((current - 1) / 4);
+			}
+		}
+	}
+
+	@Override
+	public E peek() {
+		if (!hasWork()) {
+			throw new NoSuchElementException();
+		}
+		return data[0];
+	}
+
+	@Override
+	public E next() {
+		E work = peek();
+		data[0] = data[back];
+		data[back] = null;
+		back--;
+
+		int parentIndex = 0;
+		int minChildIndex = 0;
+		E child = data[minChildIndex];
+
+		for (int i = 4 * parentIndex + 1; i <= 4 * parentIndex + 4 && i < size(); i++) {
+			if (data[i].compareTo(child) < 0) {
+				child = data[i];
+				minChildIndex = i;
+			}
+		}
+
+		while (parentIndex != minChildIndex) {
+			data[minChildIndex] = data[parentIndex];
+			data[parentIndex] = child;
+			child = data[minChildIndex];
+			parentIndex = minChildIndex;
+
+			for (int i = 4 * parentIndex + 1; i <= 4 * parentIndex + 4 && i < size(); i++) {
+				if (data[i].compareTo(child) < 0) {
+					child = data[i];
+					minChildIndex = i;
+				}
+			}
+		}
+
+		return work;
+	}
+
+	@Override
+	public int size() {
+		return back + 1;
+	}
+
+	@Override
+	public void clear() {
+		data = (E[]) new Comparable[10];
+		back = -1;
+	}
 }
