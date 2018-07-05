@@ -47,10 +47,11 @@ public class MinFourHeap<E extends Comparable<E>> extends PriorityWorkList<E> {
 
 			int current = back;
 			while (data[(int) Math.floor((current - 1) / 4)].compareTo(work) > 0) {
+				int parentIndex = (int) Math.floor((current - 1) / 4);
 				E temp = data[current];
-				data[current] = data[(int) Math.floor((current - 1) / 4)];
-				data[(int) Math.floor((current - 1) / 4)] = temp;
-				current = (int) Math.floor((current - 1) / 4);
+				data[current] = data[parentIndex];
+				data[parentIndex] = temp;
+				current = parentIndex;
 			}
 		}
 	}
