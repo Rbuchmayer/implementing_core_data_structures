@@ -38,26 +38,106 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
 
     @Override
     public V insert(K key, V value) {
-        throw new NotYetImplementedException();
+        if (key == null || value == null) {
+            throw new IllegalArgumentException();
+        }
+        Iterator<A> keyIter = key.iterator();
+        HashTrieNode curr = (HashTrieNode) root;
+        while (keyIter.hasNext()) {
+            A temp = keyIter.next();
+            if (!curr.pointers.containsKey(temp)) {
+                curr.pointers.put(temp, new HashTrieNode());
+            }
+            curr = curr.pointers.get(temp);  
+        }
+        if (curr.value != null) {
+            V retValue = curr.value;
+            curr.value = value;
+            return retValue;
+        } else {
+            curr.value = value;
+            this.size++;
+            return null;
+        }
     }
 
     @Override
     public V find(K key) {
-        throw new NotYetImplementedException();
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        Iterator<A> keyIter = key.iterator();
+        HashTrieNode curr = (HashTrieNode) root;
+        while (keyIter.hasNext()) {
+            A temp = keyIter.next();
+            if (!curr.pointers.containsKey(temp)) {
+                return null;
+            }
+            curr = curr.pointers.get(temp);  
+        }    
+        return curr.value;
     }
 
     @Override
     public boolean findPrefix(K key) {
-        throw new NotYetImplementedException();
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        Iterator<A> keyIter = key.iterator();
+        HashTrieNode curr = (HashTrieNode) root;
+        while (keyIter.hasNext()) {
+            A temp = keyIter.next();
+            if (!curr.pointers.containsKey(temp)) {
+                return false;
+            }
+            curr = curr.pointers.get(temp);  
+        } 
+        return true;
     }
 
     @Override
     public void delete(K key) {
-        throw new NotYetImplementedException();
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        Iterator<A> keyIter = key.iterator();
+        HashTrieNode curr = (HashTrieNode) root;
+        Boolean noRoute = false;
+        int counter = -1;
+        int lastNode = 0;
+        while (keyIter.hasNext() && !noRoute) {
+            A temp = keyIter.next();
+            
+            if (curr.pointers.containsKey(temp)) { 
+                counter++;
+                if (curr.value != null) {
+                    lastNode = counter;
+                }
+                curr = curr.pointers.get(temp);
+
+            } else {
+                noRoute = true;
+            }
+        }
+        if (!noRoute && curr.value != null) {
+            this.size --;
+            curr.value = null;
+        }
+        keyIter = key.iterator();
+        curr = (HashTrieNode) root;
+        lastNode--;
+        if (!noRoute && curr.pointers.isEmpty()) {
+            while (lastNode > 0) {
+                curr = curr.pointers.get(keyIter.next());
+                lastNode--;
+            }
+            curr.pointers.remove(keyIter.next());
+        }
     }
 
     @Override
     public void clear() {
-        throw new NotYetImplementedException();
+        this.size = 0;
+        this.root = new HashTrieNode();
     }
 }

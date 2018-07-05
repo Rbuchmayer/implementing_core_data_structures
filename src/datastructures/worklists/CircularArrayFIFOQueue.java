@@ -12,7 +12,7 @@ import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
 public class CircularArrayFIFOQueue<E> extends FixedSizeFIFOWorkList<E> {
     
     private E[] arr;
-    private int front;
+    private int front; 
     private int size;
 
     
