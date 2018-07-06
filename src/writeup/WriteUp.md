@@ -67,7 +67,10 @@ we made sure all our worklist data structures are efficient and run in the corre
     Say something about WHY you think you may have gotten the results you did.
     This single question is worth almost as much as the implementation of `ArrayStack`; so, please take it seriously.  If you spend less than 20 minutes
     on this question, there is no conceivable way that you answered this question in the way we were intending.<pre>
-**TODO**: Answer this question
+The first file I tested was a "book-like" file. I tested buffer lengths from 10-1000 in increments. My data 
+was (in the form of (Buffer-Length, time(s), size(kb)): (10,2.3, 79), (50, 3.0, 78), (200, 8.0, 78), (400, 40.5, 73), (600, 78, 72), (800, 104, 72), (1000, 138, 71). After plotting these points on a white board, I noticed slight linear increases in time when 
+the Buffer Length was between 10 and 200. The biggest increase in time was when I changed it from 200 to 400. After that, the time seemed to increase linearly again. I think that jump in time could be caused by some of 
+the slower operations of our data structures such as resizing the worklist. If I continued to test higher Buffer Lengths, I think I would see another jump in time once the lists resize again. That jump in time is also when the the biggest jump in compression was.
 </pre><br>
 
 #### Above and Beyond ####
