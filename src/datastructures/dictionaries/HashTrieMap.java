@@ -80,6 +80,11 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         }
     }
     
+    /*
+     * Helper method for finding node in Trie Map given a key, throws new
+     * IllegalArgumentException if key is null, returns null if there is no
+     * node for given key
+     */
     private HashTrieNode findHelper(K key) {
         if (key == null) {
             throw new IllegalArgumentException();
@@ -109,13 +114,14 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         int nodesToRemove = 0;
         while (keyIter.hasNext() && !noRoute) {
             A temp = keyIter.next();
-            
             if (curr.pointers.containsKey(temp)) { 
+                
                 if (curr.value != null || curr.pointers.keySet().size() >= 2) {
                     lastValue = curr;
                     toRemove = temp;
                     nodesToRemove = 0;
                 }
+                
                 nodesToRemove++;
                 curr = curr.pointers.get(temp);
 
