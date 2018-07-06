@@ -102,36 +102,37 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         }
         Iterator<A> keyIter = key.iterator();
         HashTrieNode curr = (HashTrieNode) root;
+        HashTrieNode lastValue = null;
+        A toRemove = null;
         Boolean noRoute = false;
-        int counter = -1;
-        int lastNode = 0;
+        int nodesToRemove = 0;
         while (keyIter.hasNext() && !noRoute) {
             A temp = keyIter.next();
             
             if (curr.pointers.containsKey(temp)) { 
-                counter++;
-                if (curr.value != null) {
-                    lastNode = counter;
+                if (curr.value != null || curr.pointers.keySet().size() >= 2) {
+                    lastValue = curr;
+                    toRemove = temp;
+                    nodesToRemove = 0;
                 }
+                nodesToRemove++;
                 curr = curr.pointers.get(temp);
 
             } else {
                 noRoute = true;
             }
         }
-        if (!noRoute && curr.value != null) {
-            this.size --;
-            curr.value = null;
-        }
-        keyIter = key.iterator();
-        curr = (HashTrieNode) root;
-        lastNode--;
-        if (!noRoute && curr.pointers.isEmpty()) {
-            while (lastNode > 0) {
-                curr = curr.pointers.get(keyIter.next());
-                lastNode--;
+        if (!noRoute) {
+            if (curr.pointers.isEmpty()) {
+                if (lastValue == null) {
+                    clear();
+                } else {
+                    lastValue.pointers.remove(toRemove);
+                    this.size -= nodesToRemove;
+                }
+            } else {
+                curr.value = null;
             }
-            curr.pointers.remove(keyIter.next());
         }
     }
 
