@@ -32,6 +32,8 @@ and the material was interesting and easy to work together on.
 -   The ADT for a WorkList explicitly forbids access to the middle elements.  However, the FixedSizeFIFOWorkList has a peek(i) method
     which allows you to do exactly that.  Why is this an acceptable addition to the WorkList ADT in this particular case but not in general?  
     In other words, what about fixed size FIFO worklists makes peek(i) make sense? Why does peek(i) NOT make sense in other worklist implementations?<pre>
+Using arrays for FIFO worklists is perfect when we know a max size of the worklist, peek(i) becomes very easy and quick for arrays because its just a little math and accessing one index in the array which is O(1). The problem with arrays is that they can't be resized, and it would take 0(n) time to copy every time we need a bigger array. Other worklists come into play here with using some type of resizable structure such as linked lists, in these worklists we no longer have access to any of the middle elements and thus is would take 0(n) time to access a certain element, this is not optimal.
+
 In other worklists, the resizing of the worklist can make the array grow very large, so it may take a long time to find the element. In a fixed length list, the length of the list is controlled, so we know it will not grow
 out of control.
 </pre><br>
