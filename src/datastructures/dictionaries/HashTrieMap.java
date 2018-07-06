@@ -63,6 +63,24 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
 
     @Override
     public V find(K key) {
+        HashTrieNode node = findHelper(key);
+        if (node == null) {
+            return null;
+        } else {
+            return node.value;
+        }
+    }
+
+    @Override
+    public boolean findPrefix(K key) {
+        if (findHelper(key) == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    private HashTrieNode findHelper(K key) {
         if (key == null) {
             throw new IllegalArgumentException();
         }
@@ -74,25 +92,8 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
                 return null;
             }
             curr = curr.pointers.get(temp);  
-        }    
-        return curr.value;
-    }
-
-    @Override
-    public boolean findPrefix(K key) {
-        if (key == null) {
-            throw new IllegalArgumentException();
         }
-        Iterator<A> keyIter = key.iterator();
-        HashTrieNode curr = (HashTrieNode) root;
-        while (keyIter.hasNext()) {
-            A temp = keyIter.next();
-            if (!curr.pointers.containsKey(temp)) {
-                return false;
-            }
-            curr = curr.pointers.get(temp);  
-        } 
-        return true;
+        return curr;
     }
 
     @Override
