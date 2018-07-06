@@ -34,6 +34,7 @@ public class MinFourHeap<E extends Comparable<E>> extends PriorityWorkList<E> {
 			back++;
 			data[back] = work;
 		} else {
+		    // resizing array
 			if (back == data.length - 1) {
 				E[] resized = (E[]) new Comparable[data.length * 2];
 				for (int i = 0; i < data.length; i++) {
@@ -44,7 +45,7 @@ public class MinFourHeap<E extends Comparable<E>> extends PriorityWorkList<E> {
 
 			back++;
 			data[back] = work;
-
+			// percolate up
 			int current = back;
 			while (data[((current - 1) / 4)].compareTo(work) > 0) {
 				int parentIndex = (current - 1) / 4;
