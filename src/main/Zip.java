@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import cse332.jazzlib.ZipEntry;
 import cse332.jazzlib.ZipOutputStream;
@@ -18,7 +19,7 @@ import cse332.jazzlib.ZipOutputStream;
 public class Zip {
 
     /** Larger -> better compression ratio, slower runtime **/
-    public static final int BUFFER_LENGTH = 200;
+    public static int BUFFER_LENGTH = 490;
 
     /** This constant will spit out compression debug output if turned on **/
     public static final boolean DEBUG_OUTPUT = true;
@@ -26,15 +27,20 @@ public class Zip {
     
     /** Constants that define the input and output **/
     public static final String ZIP_NAME = "test.zip";
-    public static final String FILE_TO_COMPRESS = "test.txt";
+    public static final String FILE_TO_COMPRESS = "book.txt";
 
     public static void main(String[] args) throws IOException {
-        FileOutputStream fos = new FileOutputStream(ZIP_NAME);
-        ZipOutputStream zos = new ZipOutputStream(fos);
-        addToZipFile(FILE_TO_COMPRESS, zos);
 
-        zos.close();
-        fos.close();
+            long first = new Date().getTime();
+            FileOutputStream fos = new FileOutputStream(ZIP_NAME);
+            ZipOutputStream zos = new ZipOutputStream(fos);
+            addToZipFile(FILE_TO_COMPRESS, zos);
+    
+            zos.close();
+            fos.close();
+            
+            long end = new Date().getTime();
+            System.out.println(end-first);
     }
 
     public static void addToZipFile(String fileName, ZipOutputStream zos) throws FileNotFoundException, IOException {

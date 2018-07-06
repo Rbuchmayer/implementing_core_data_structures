@@ -49,7 +49,7 @@ to be sorted.
     of the possible words (horizontal, vertical, diagonal, etc.).  In Boggle, a similar game, any consecutive chain of letters
     are allowed.  Explain (in very high-level pseudo-code) how you might solve this problem with a TrieSet or a TrieMap.  Make sure to detail
     how a similar solution that uses a HashSet/HashMap instead would be different and why using a Trie might make the solution better.<pre>
-
+With a TrieSet or a TrieMap: For each 
 Begin with an empty Trie. If the word is a valid word then insert the word to the Trie by building off a
 prefix or adding an entire new key. It's value would be the string of the word. 
 A HashMap or HashSet would not allow players to build off of other words.
