@@ -38,13 +38,10 @@ Using arrays for FIFO worklists is perfect when we know a max size of the workli
  need a bigger array. Other worklists come into play here with using some type of resizable structure such 
  as linked lists, in these worklists we no longer have access to any of the middle elements and thus is 
  would take 0(n) time to access a certain element, this is not optimal.
-
-In other worklists, the resizing of the worklist can make the array grow very large, so it may take a long time to find the element. In a fixed length list, the length of the list is controlled, so we know it will not grow
-out of control.
 </pre><br>
 -   As we've described it, a `TrieMap` seems like a general-purpose replacement for `HashMap` or `TreeMap`.  Why might we still want to use one
     of these other data structures instead?<pre>
-The other data structures allow us to use other things than strings/bytes as keys. HashMap and TreeMap allow 
+The other data structures allow us to use other types of keys other than strings/bytes. HashMap and TreeMap allow 
 us to use whatever we want as keys. We can also choose between HashMap/TreeMap depending on if we want out keys
 to be sorted. 
 </pre><br>
