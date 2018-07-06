@@ -4,7 +4,7 @@
 #### How Was Your Partnership? ####
 -   Did both partners do an equal amount of work?  If not, why not?
     If so, what did each person do? What happened?<pre>
-Each of of did about the same amount of work. When we coded together, 
+Each of us did about the same amount of work. When we coded together, 
 Jory did the typing while we both came up with the ideas. We also each did
 a little bit of work on our own when we could not meet up. For example, Ryan
 did a lot of minFourHeap alone and Jory finished up hashTrieMap alone.
@@ -15,9 +15,10 @@ did a lot of minFourHeap alone and Jory finished up hashTrieMap alone.
 #### Project Enjoyment ####
 -   What was your favorite part of the project?  What was your least
     favorite part of the project?<pre>
-My favorite part of the project was implementing the Heaps and Tries. 
-My least favorite part was dealing with the wrap around of the circularArray
-because it took us a while to figure out.
+Our favorite part of the project was implementing the Heaps and Tries because
+of how the complex math worked out neatly in the end. 
+Our least favorite part was dealing with the wrap around of the circularArray
+because it took us a while to iron out the little small errors with +1/-1/etc.
 </pre><br>
 
 -   Did you enjoy the project?  Why or why not?<pre>
