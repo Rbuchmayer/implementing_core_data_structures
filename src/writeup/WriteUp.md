@@ -4,7 +4,10 @@
 #### How Was Your Partnership? ####
 -   Did both partners do an equal amount of work?  If not, why not?
     If so, what did each person do? What happened?<pre>
-**TODO**: Answer this question
+Each of of did about the same amount of work. When we coded together, 
+Jory did the typing while we both came up with the ideas. We also each did
+a little bit of work on our own when we could not meet up. For example, Ryan
+did a lot of minFourHeap alone and Jory finished up hashTrieMap alone.
 </pre><br>
 
 -----
@@ -12,11 +15,14 @@
 #### Project Enjoyment ####
 -   What was your favorite part of the project?  What was your least
     favorite part of the project?<pre>
-**TODO**: Answer this question
+My favorite part of the project was implementing the Heaps and Tries. 
+My least favorite part was dealing with the wrap around of the circularArray
+because it took us a while to figure out.
 </pre><br>
 
 -   Did you enjoy the project?  Why or why not?<pre>
-**TODO**: Answer this question
+Overall we enjoyed the project because it was out first time working together
+and the material was interesting and easy to work together on.
 </pre><br>
 
 -----
@@ -25,11 +31,14 @@
 -   The ADT for a WorkList explicitly forbids access to the middle elements.  However, the FixedSizeFIFOWorkList has a peek(i) method
     which allows you to do exactly that.  Why is this an acceptable addition to the WorkList ADT in this particular case but not in general?  
     In other words, what about fixed size FIFO worklists makes peek(i) make sense? Why does peek(i) NOT make sense in other worklist implementations?<pre>
-**TODO**: Answer this question
+In other worklists, the length of the list can make the array grow very large, so it may take a long time to
+find the element. In a fixed length list, the length of the list is controlled and fixed.
 </pre><br>
 -   As we've described it, a `TrieMap` seems like a general-purpose replacement for `HashMap` or `TreeMap`.  Why might we still want to use one
     of these other data structures instead?<pre>
-**TODO**: Answer this question
+The other data structures allow us to use other things than strings/bytes as keys. HashMap and TreeMap allow 
+us to use whatever we want as keys. We can also choose between HashMap/TreeMap depending on if we want out keys
+to be sorted. 
 </pre><br>
 -   One of the applications of Tries is in solving Word Searches.  A "word search" is an n x m rectangle of letters.  The goal is to find all
     of the possible words (horizontal, vertical, diagonal, etc.).  In Boggle, a similar game, any consecutive chain of letters
