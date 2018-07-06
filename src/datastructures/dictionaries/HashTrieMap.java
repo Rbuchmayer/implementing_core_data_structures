@@ -43,13 +43,16 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         }
         Iterator<A> keyIter = key.iterator();
         HashTrieNode curr = (HashTrieNode) root;
+        // travels down tree using iterator output, creating children if child DNE
         while (keyIter.hasNext()) {
-            A temp = keyIter.next();
-            if (!curr.pointers.containsKey(temp)) {
-                curr.pointers.put(temp, new HashTrieNode());
+            A charK = keyIter.next();
+            if (!curr.pointers.containsKey(charK)) {
+                curr.pointers.put(charK, new HashTrieNode());
             }
-            curr = curr.pointers.get(temp);  
+            curr = curr.pointers.get(charK);  
         }
+        
+        // returns existing value at node, null if DNE
         if (curr.value != null) {
             V retValue = curr.value;
             curr.value = value;
@@ -91,12 +94,13 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         }
         Iterator<A> keyIter = key.iterator();
         HashTrieNode curr = (HashTrieNode) root;
+        // travels down tree using iterator output, returning null if child DNE
         while (keyIter.hasNext()) {
-            A temp = keyIter.next();
-            if (!curr.pointers.containsKey(temp)) {
+            A charK = keyIter.next();
+            if (!curr.pointers.containsKey(charK)) {
                 return null;
             }
-            curr = curr.pointers.get(temp);  
+            curr = curr.pointers.get(charK);  
         }
         return curr;
     }
@@ -108,27 +112,34 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
         }
         Iterator<A> keyIter = key.iterator();
         HashTrieNode curr = (HashTrieNode) root;
+        // reference to the last node that contained a value before reaching delete value
         HashTrieNode lastValue = null;
+        // which child of last value to remove if last value has multiple children
         A toRemove = null;
+        // flag if have no such node exists
         Boolean noRoute = false;
+        // how many nodes will be deleted with this function, for updating size
         int nodesToRemove = 0;
+        
         while (keyIter.hasNext() && !noRoute) {
-            A temp = keyIter.next();
-            if (curr.pointers.containsKey(temp)) { 
+            A charK = keyIter.next();
+            if (curr.pointers.containsKey(charK)) { 
                 
                 if (curr.value != null || curr.pointers.keySet().size() >= 2) {
                     lastValue = curr;
-                    toRemove = temp;
+                    toRemove = charK;
                     nodesToRemove = 0;
                 }
                 
                 nodesToRemove++;
-                curr = curr.pointers.get(temp);
+                curr = curr.pointers.get(charK);
 
             } else {
                 noRoute = true;
             }
         }
+        // if there was something to delete, either delete the value, delete tree up to
+        // the last node with a value or delete entire tree (only one value in tree)
         if (!noRoute) {
             if (curr.pointers.isEmpty()) {
                 if (lastValue == null) {
