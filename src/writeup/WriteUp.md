@@ -31,8 +31,8 @@ and the material was interesting and easy to work together on.
 -   The ADT for a WorkList explicitly forbids access to the middle elements.  However, the FixedSizeFIFOWorkList has a peek(i) method
     which allows you to do exactly that.  Why is this an acceptable addition to the WorkList ADT in this particular case but not in general?  
     In other words, what about fixed size FIFO worklists makes peek(i) make sense? Why does peek(i) NOT make sense in other worklist implementations?<pre>
-In other worklists, the length of the list can make the array grow very large, so it may take a long time to
-find the element. In a fixed length list, the length of the list is controlled and fixed.
+In other worklists, the resizing of the worklist can make the array grow very large, so it may take a long time to find the element. In a fixed length list, the length of the list is controlled, so we know it will not grow
+out of control.
 </pre><br>
 -   As we've described it, a `TrieMap` seems like a general-purpose replacement for `HashMap` or `TreeMap`.  Why might we still want to use one
     of these other data structures instead?<pre>
@@ -44,7 +44,14 @@ to be sorted.
     of the possible words (horizontal, vertical, diagonal, etc.).  In Boggle, a similar game, any consecutive chain of letters
     are allowed.  Explain (in very high-level pseudo-code) how you might solve this problem with a TrieSet or a TrieMap.  Make sure to detail
     how a similar solution that uses a HashSet/HashMap instead would be different and why using a Trie might make the solution better.<pre>
-**TODO**: Answer this question
+
+Begin with an empty Trie
+if the word is a valid word
+	then insert the word to the Trie by building off a prefix or adding an entire new key. It's value would
+	be the string of the word.
+	
+A HashMap or HashSet would not allow players to build off of other words.
+
 </pre><br>
 -   One of the classes in the main package is called Zip.  This class uses your PriorityQueue to do Huffman coding, your FIFOQueue as a buffer,
     your stack to calculate the keyset of a trie (using recursive backtracking), and your SuffixTrie to do LZ77Compression.  Find some text file
@@ -52,7 +59,8 @@ to be sorted.
     standard zip utility on your machine (Finder on OS X, zip on Linux, WinZip or the like on Windows) to UNZIP your file.  Check that you got back
     the original.  Congratulations!  Your program correctly implements the same compression algorithm you have been using for years!  Discuss in a
     sentence or two how good the compression was and why you think it was good or bad.<pre>
-**TODO**: Answer this question
+The compression seemed just as fast as I am use to seeing zip files compress. I think it worked well because
+we made sure all our worklist data structures are efficient and run in the correct runtimes.
 </pre><br>
 -   Now that you've played with Zip, we want you to do an **experiment** with Zip.  Notice that there is a constant called `BUFFER_LENGTH` in `Zip.java`.
     Higher values of this constant makes the compression algorithm that Zip uses use more memory and consequently more time.  The "compression ratio"
