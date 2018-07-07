@@ -19,7 +19,8 @@ import cse332.jazzlib.ZipOutputStream;
 public class Zip {
 
     /** Larger -> better compression ratio, slower runtime **/
-    public static int BUFFER_LENGTH = 490;
+    public static int BUFFER_LENGTH = 400
+            ;
 
     /** This constant will spit out compression debug output if turned on **/
     public static final boolean DEBUG_OUTPUT = true;
