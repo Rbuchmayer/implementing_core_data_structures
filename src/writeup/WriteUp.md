@@ -55,7 +55,8 @@ contains no words in the dictionary and can move onto the next line (i.e. if we 
 when we go to check "tt", the prefix won't be contained in the dictionary and we can skip checking for "ttt", "tttt",
  "tttt", the same goes for boggle except you have to use a recursive method to create the lines by making a line for 
  each of the 8 surrounding squares.
-This is especially useful because the majority of possible words that you would have to check in these games are not words in the dictionary, therefore eliminating a lot of the work needed to be done, if you chose to use a HashMap or 
+This is especially useful because the majority of possible words that you would have to check in these games are not 
+words in the dictionary, therefore eliminating a lot of the work needed to be done, if you chose to use a HashMap or 
 TreeMap you would have to exhaust all possible lines in order to find all the possible words.
 
 </pre><br>
