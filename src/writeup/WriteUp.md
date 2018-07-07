@@ -49,10 +49,13 @@ to be sorted.
     of the possible words (horizontal, vertical, diagonal, etc.).  In Boggle, a similar game, any consecutive chain of letters
     are allowed.  Explain (in very high-level pseudo-code) how you might solve this problem with a TrieSet or a TrieMap.  Make sure to detail
     how a similar solution that uses a HashSet/HashMap instead would be different and why using a Trie might make the solution better.<pre>
-With a TrieSet or a TrieMap: For each 
-Begin with an empty Trie. If the word is a valid word then insert the word to the Trie by building off a
-prefix or adding an entire new key. It's value would be the string of the word. 
-A HashMap or HashSet would not allow players to build off of other words.
+With a TrieSet or a TrieMap we can store the dictionary in a very efficient way, when checking each possible row/col/diag
+we can check the dictionary for each prefix, if a prefix isn't in the dictionary then we know the rest of the row/col
+contains no words in the dictionary and can move onto the next line (i.e. if we have a line "tttttt", after we check "t",
+when we go to check "tt", the prefix won't be contained in the dictionary and we can skip checking for "ttt", "tttt", "tttt", the same goes for boggle except you have to use a recursive method to create the lines by making a line for each 
+of the 8 surrounding squares.
+This is especially useful because the majority of possible words that you would have to check in these games are not words in the dictionary, therefore eliminating a lot of the work needed to be done, if you chose to use a HashMap or 
+TreeMap you would have to exhaust all possible lines in order to find all the possible words.
 
 </pre><br>
 -   One of the classes in the main package is called Zip.  This class uses your PriorityQueue to do Huffman coding, your FIFOQueue as a buffer,
