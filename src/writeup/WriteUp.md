@@ -61,9 +61,16 @@ A HashMap or HashSet would not allow players to build off of other words.
     standard zip utility on your machine (Finder on OS X, zip on Linux, WinZip or the like on Windows) to UNZIP your file.  Check that you got back
     the original.  Congratulations!  Your program correctly implements the same compression algorithm you have been using for years!  Discuss in a
     sentence or two how good the compression was and why you think it was good or bad.<pre>
-The zip program worked correctly as far as being correct, when unzipping the zipped file, it was an exactly copy of what we zipped.  Measuring the time was harder with many outside variables affecting it, but keeping them as constant as possible our zip still ran a decent amount slower than 
-the the 7zip program we used.  Also, the zip file from 7zip was around half the size of the file
-our zip program ran.  Reading ahead to the next question, this could be changed by changing the BUFFER_LENGTH to a larger value.  Our zip program is most likely slower due to being made so it can implement our structures rather than being made to optimize the zipping.  Programs like 7zip have had years to optimize how they run and probably have structures built specificically for huffman encoding and/or use other algorithms that zip files with different distributions of characters better. 
+The zip program worked correctly as far as being correct, when unzipping the zipped file, it 
+was an exactly copy of what we zipped.  Measuring the time was harder with many outside 
+variables affecting it, but keeping them as constant as possible our zip still ran a decent 
+amount slower than the the 7zip program we used.  Also, the zip file from 7zip was around 
+half the size of the fileour zip program ran.  Reading ahead to the next question, this 
+could be changed by changing the BUFFER_LENGTH to a larger value.  Our zip program is 
+most likely slower due to being made so it can implement our structures rather than being 
+made to optimize the zipping.  Programs like 7zip have had years to optimize how they run 
+and probably have structures built specificically for huffman encoding and/or use other 
+algorithms that zip files with different distributions of characters better. 
 </pre><br>
 -   Now that you've played with Zip, we want you to do an **experiment** with Zip.  Notice that there is a constant called `BUFFER_LENGTH` in `Zip.java`.
     Higher values of this constant makes the compression algorithm that Zip uses use more memory and consequently more time.  The "compression ratio"
@@ -76,7 +83,19 @@ our zip program ran.  Reading ahead to the next question, this could be changed 
 First we tested the same text file across many differ buffer lengths between 10 and 2000.  We used 
 Date().getTime() differences to compare zip times, the times aren't useful for comparing against
 any other programs or systems as the time it takes is completely dependent on your system but we were
-able to get graph with pretty strong correlation around two different lines.  We had to take a lot more data points around 200 - 400 buffer size because around here the slope of the lines changed dramatically.  The first line of best fit went from about 10 - 215 where it leaped to a different line of best fit whose time/buffer_size was about 150% of the first line.  From what we know about buffer size this probably has to do with having to access different/further sections of memory and is dependent on the system. Both lines were linear, probably due to the worst big-O of the structures used was 0(n) which is linear. The html for this gitlab page was much smaller than the size of the book, so we copied and pasted the html until it was a comparable size to the book.  The difference between times zipping the book and html were very similiar when holding the size constant.  One thing we noticed was that the size of the zipped html was much smaller (about 2/3s) of the size of the zipped book.  The is likely to be due to html containing a lot of the same patterns (div, content, etc) and the same characters (<, >, ", =) repeated a lot making the huffman encoding much more efficient.
+able to get graph with pretty strong correlation around two different lines.  We had to take a lot
+ more data points around 200 - 400 buffer size because around here the slope of the lines changed 
+ dramatically.  The first line of best fit went from about 10 - 215 where it leaped to a different
+  line of best fit whose time/buffer_size was about 150% of the first line.  From what we know about
+   buffer size this probably has to do with having to access different/further sections of memory 
+   and is dependent on the system. Both lines were linear, probably due to the worst big-O of the 
+   structures used was 0(n) which is linear. The html for this gitlab page was much smaller than 
+   the size of the book, so we copied and pasted the html until it was a comparable size to the 
+   book.  The difference between times zipping the book and html were very similiar when holding 
+   the size constant.  One thing we noticed was that the size of the zipped html was much smaller 
+   (about 2/3s) of the size of the zipped book.  The is likely to be due to html containing a lot 
+   of the same patterns (div, content, etc) and the same characters (<, >, ", =) repeated a lot 
+   making the huffman encoding much more efficient.
 </pre><br>
 
 #### Above and Beyond ####
